@@ -26,26 +26,6 @@ public class OutputFileWriter {
     return "UPDATE `FAILURE_LOCATION` SET FAILURE_LOCATION = '"+failureLocation+"' WHERE BASEDTC = '"+baseDtc+"';\n";
   }
 
-  public void writeHexagonalsToFile(List<String> hexagonals) {
-    try (FileWriter writer = new FileWriter("Hexagonals.txt")) {
-      writer.write(hexagonalInsert());
-      for (int i = 0; i < hexagonals.size(); i++) {
-        String element = hexagonals.get(i);
-        if (i == 0) {
-          writer.write(hexagonalFirst(element));
-        }
-        else if (i == hexagonals.size() - 1) {
-          writer.write(hexagonalLast(element));
-        } else {
-          writer.write(hexagonalRow(element));
-        }
-      }
-      System.out.println("Content successfully written to " + "Hexagonals.txt");
-    } catch (IOException e) {
-      System.err.println("Error writing to file: " + e.getMessage());
-    }
-  }
-
   private String hexagonalInsert(){
     return "INSERT INTO `FAILURELOCATION` (BASEDTC) \n";
   }

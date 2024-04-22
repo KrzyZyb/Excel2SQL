@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -20,11 +18,17 @@ import org.apache.poi.util.StringUtil;
 public class ImportedFile {
   public static final int SHEET_IDX = 0;
   public static final int FIRST_COLUMN_IDX = 0;
+  public static int NUMBER_OF_COLUMNS;
   private final Workbook file;
+  private final Row headerRow;
+  private final List<Row> rows;
 
   public ImportedFile(Workbook file) {
     validateFile(file);
+    this.headerRow = this.findHeader(file);
+    NUMBER_OF_COLUMNS = headerRow.getLastCellNum();
     this.file = file;
+    this.rows = findRows(file);
   }
 
   public Row getHeader() {

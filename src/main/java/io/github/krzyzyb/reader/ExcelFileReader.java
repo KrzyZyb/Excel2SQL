@@ -2,6 +2,7 @@ package io.github.krzyzyb.reader;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,10 +13,8 @@ import org.apache.poi.openxml4j.exceptions.NotOfficeXmlFileException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelFileReader {
 
-  public ImportedFile read() throws FileNotFoundException {
-    String filePath = "/Users/kzybul/IdeaProjects/XLS2Flyway/";
-    String fileName = "Failure_Types.xlsx";
-    byte[] fileContent =  loadExcelFile(filePath+fileName);
+  public ImportedFile read(Path path) throws FileNotFoundException {
+    byte[] fileContent =  loadExcelFile(path);
     ImportedFile persistedFile;
     try {
       assert fileContent != null;
@@ -28,8 +27,8 @@ public class ExcelFileReader {
     return persistedFile;
   }
 
-  public static byte[] loadExcelFile(String filePath) throws FileNotFoundException {
-    InputStream inputStream = new FileInputStream(filePath);
+  public static byte[] loadExcelFile(Path path) throws FileNotFoundException {
+    InputStream inputStream = new FileInputStream(path.toFile());
     try {
       ByteArrayOutputStream buffer = new ByteArrayOutputStream();
       int bytesRead;

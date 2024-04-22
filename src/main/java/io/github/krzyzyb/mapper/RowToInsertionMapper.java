@@ -10,7 +10,6 @@ public class RowToInsertionMapper {
   String TABLE_NAME = "";
   String SPACE = "";
   String DOUBLE_QUOTE = "\"";
-
   String TABLE_STRUCTURE = "()";
   StringBuilder builder = new StringBuilder();
 
@@ -18,8 +17,6 @@ public class RowToInsertionMapper {
     String[] lines = new String[rows.size()];
 
     for(int i = 0; i < rows.size(); i++){
-      Cell DEUTSCHFEHLERORT = rows.get(i).getCell(0);
-      Cell SAECODEHEX = rows.get(i).getCell(1);
       String line = builder
           .append(DOUBLE_QUOTE)
           .append(INSERT)
@@ -31,12 +28,4 @@ public class RowToInsertionMapper {
     }
     return lines;
   }
-
-//  INSERT INTO PRIVILEGE (ID, NAME, TYPE)
-//  VALUES (98, 'CREATE_WORKING_VERSION_OF_DO', 'PROJECT');
-
-//  UPDATE PRIVILEGE
-//  SET NAME = 'EDIT_PROJECT_GLOBAL_INFORMATION'
-//  WHERE NAME = 'EDIT_PROJECT_PROPERTIES';
-
 }
