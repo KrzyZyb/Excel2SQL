@@ -1,9 +1,10 @@
-package io.github.krzyzyb.reader;
+package io.github.krzyzyb.reader.exceptions;
 
 import java.io.Serial;
+import java.util.List;
 import java.util.Set;
 
-public class DuplicatedColumnsException extends Throwable {
+public class DuplicatedColumnsException extends Exception {
 
   private final Set<String> duplicatedColumnNames;
   @Serial
@@ -13,7 +14,7 @@ public class DuplicatedColumnsException extends Throwable {
     this.duplicatedColumnNames = duplicatedColumnNames;
   }
 
-  public String[] getDuplicatedColumnNames() {
-    return duplicatedColumnNames.toArray(new String[duplicatedColumnNames.size()]);
+  public Set<String> getDuplicatedColumnNames() {
+    return duplicatedColumnNames;
   }
 }

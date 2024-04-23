@@ -2,7 +2,6 @@ package io.github.krzyzyb.reader;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +10,9 @@ import java.nio.file.Path;
 
 import org.apache.poi.openxml4j.exceptions.NotOfficeXmlFileException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import io.github.krzyzyb.reader.entities.ImportedFile;
+
 public class ExcelFileReader {
 
   public ImportedFile read(Path path) throws FileNotFoundException {
@@ -27,7 +29,7 @@ public class ExcelFileReader {
     return persistedFile;
   }
 
-  public static byte[] loadExcelFile(Path path) throws FileNotFoundException {
+  private static byte[] loadExcelFile(Path path) throws FileNotFoundException {
     InputStream inputStream = new FileInputStream(path.toFile());
     try {
       ByteArrayOutputStream buffer = new ByteArrayOutputStream();

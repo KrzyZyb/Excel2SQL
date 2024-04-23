@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Row;
 
 import io.github.krzyzyb.reader.ExcelFileReader;
-import io.github.krzyzyb.reader.ImportedFile;
+import io.github.krzyzyb.reader.entities.ImportedFile;
 import io.github.krzyzyb.writer.OutputFileWriter;
 
 /**

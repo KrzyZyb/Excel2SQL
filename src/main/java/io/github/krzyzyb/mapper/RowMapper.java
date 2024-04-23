@@ -2,10 +2,9 @@ package io.github.krzyzyb.mapper;
 
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-public class RowToInsertionMapper {
+public class RowMapper {
   public static String INSERT = "INSERT INTO";
   String TABLE_NAME = "";
   String SPACE = "";

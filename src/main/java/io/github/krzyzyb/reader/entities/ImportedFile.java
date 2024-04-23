@@ -1,6 +1,5 @@
-package io.github.krzyzyb.reader;
+package io.github.krzyzyb.reader.entities;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,6 +13,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.StringUtil;
+
+import io.github.krzyzyb.reader.exceptions.DuplicatedColumnsException;
 
 public class ImportedFile {
   public static final int SHEET_IDX = 0;
@@ -32,11 +33,11 @@ public class ImportedFile {
   }
 
   public Row getHeader() {
-    return findHeader(file);
+    return headerRow;
   }
 
   public List<Row> getRows() {
-    return findRows(file);
+    return rows;
   }
 
   private void validateFile(Workbook file) {
@@ -48,7 +49,7 @@ public class ImportedFile {
     try {
       checkIfColumnsAreDuplicated(header);
     } catch (DuplicatedColumnsException e){
-      System.err.println("Duplicated column "+ Arrays.toString(e.getDuplicatedColumnNames()));
+      e.getDuplicatedColumnNames().forEach(columnName -> System.err.println("Duplicated column name: "+ columnName));
     }
   }
 
