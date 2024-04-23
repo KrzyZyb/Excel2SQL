@@ -13,8 +13,8 @@ import io.github.krzyzyb.reader.entities.XlsTemplate;
 public class Xls2SqlProcessor {
   public static void process(Path inputFile, Path outputFile){
       ImportedFile file = readFile(inputFile);
-      XlsFileValidator.validateFile(file.getHeader());
-      XlsTemplate xlsTemplate = new XlsTemplate(file.getHeader(), file.getRows(), file.getNumberOfColumns());
+      XlsFileValidator.validateHeader(file.getHeader());
+      XlsTemplate xlsTemplate = new XlsTemplate(file.getHeader(), file.getRows());
       write(xlsTemplate, outputFile);
   }
 

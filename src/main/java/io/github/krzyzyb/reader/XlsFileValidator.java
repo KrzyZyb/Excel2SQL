@@ -4,17 +4,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.util.StringUtil;
 
+import io.github.krzyzyb.reader.entities.HeaderTemplate;
 import io.github.krzyzyb.reader.exceptions.DuplicatedColumnsException;
 
 public class XlsFileValidator {
 
-  public static void validateFile(Row header) {
+  public static void validateHeader(HeaderTemplate header) {
     try {
       checkIfColumnsAreDuplicated(header);
     } catch (DuplicatedColumnsException e){
@@ -22,7 +21,7 @@ public class XlsFileValidator {
     }
   }
 
-  private static void checkIfColumnsAreDuplicated(Row header) throws DuplicatedColumnsException {
+  private static void checkIfColumnsAreDuplicated(HeaderTemplate header) throws DuplicatedColumnsException {
     List<String> columnNames = getAllColumnNames(header);
     Set<String> duplicatedColumnNames = findDuplicatedColumns(columnNames);
     if (!duplicatedColumnNames.isEmpty()) {
@@ -30,8 +29,8 @@ public class XlsFileValidator {
     }
   }
 
-  private static List<String> getAllColumnNames(Row header) {
-    return StreamSupport.stream(header.spliterator(), false)
+  private static List<String> getAllColumnNames(HeaderTemplate header) {
+    return header.columns().stream()
         .map(Cell::getStringCellValue)
         .filter(StringUtil::isNotBlank)
         .collect(Collectors.toList());
