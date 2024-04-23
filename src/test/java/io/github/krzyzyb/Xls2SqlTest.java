@@ -7,7 +7,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class XLS2FlywayTest
+public class Xls2SqlTest
     extends TestCase
 {
     /**
@@ -15,7 +15,7 @@ public class XLS2FlywayTest
      *
      * @param testName name of the test case
      */
-    public XLS2FlywayTest(String testName )
+    public Xls2SqlTest(String testName )
     {
         super( testName );
     }
@@ -25,7 +25,7 @@ public class XLS2FlywayTest
      */
     public static Test suite()
     {
-        return new TestSuite( XLS2FlywayTest.class );
+        return new TestSuite( Xls2SqlTest.class );
     }
 
     /**

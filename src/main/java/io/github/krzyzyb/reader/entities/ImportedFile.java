@@ -12,6 +12,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import lombok.Getter;
+
+@Getter
 public class ImportedFile {
   public static final int SHEET_IDX = 0;
   private final HeaderTemplate headerRow;
@@ -20,14 +23,6 @@ public class ImportedFile {
   public ImportedFile(Workbook file) {
     this.headerRow = this.findHeader(file);
     this.rows = findRows(file);
-  }
-
-  public HeaderTemplate getHeader() {
-    return headerRow;
-  }
-
-  public List<Row> getRows() {
-    return rows;
   }
 
   private HeaderTemplate findHeader(Workbook file) {
