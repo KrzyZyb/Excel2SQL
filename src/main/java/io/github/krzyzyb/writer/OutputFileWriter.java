@@ -36,9 +36,7 @@ public class OutputFileWriter {
 
   private static String writeHeaderLine(HeaderTemplate header){
     List<String> columnNames = getAllColumnNames(header);
-    String failureLocation = "failureLocation";
-    String baseDtcOriginal = "baseDtcOriginal";
-    return "UPDATE `FAILURE_LOCATION` SET FAILURE_LOCATION = '"+failureLocation+"' WHERE BASEDTC = '"+baseDtcOriginal+"';\n";
+    return "INSERT INTO `FAILURELOCATION` ("+String.join(", ", columnNames)+") VALUES\n";
   }
 
   private static List<String> getAllColumnNames(HeaderTemplate header) {
