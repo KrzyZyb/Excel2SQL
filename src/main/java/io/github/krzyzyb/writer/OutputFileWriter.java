@@ -16,7 +16,8 @@ import io.github.krzyzyb.reader.entities.XlsTemplate;
 public class OutputFileWriter {
   public static void write(XlsTemplate xlsTemplate, Path outputFile) {
     try (FileWriter writer = new FileWriter(outputFile.toFile())) {
-      prepareStructure(writer, xlsTemplate.header());
+      String tableName = removeExtension(outputFile.getFileName().toString());
+      prepareStructure(tableName, writer, xlsTemplate.header());
       prepareContent(writer, xlsTemplate.rows());
       System.out.println("Content successfully written to " + outputFile);
     } catch (IOException e) {
@@ -24,8 +25,8 @@ public class OutputFileWriter {
     }
   }
 
-  private static void prepareStructure(FileWriter writer, HeaderTemplate header) throws IOException {
-    writer.write(writeHeaderLine(header));
+  private static void prepareStructure(String tableName, FileWriter writer, HeaderTemplate header) throws IOException {
+    writer.write(writeHeaderLine(tableName, header));
   }
 
   private static void prepareContent(FileWriter writer, List<Row> rows) throws IOException {
@@ -34,9 +35,9 @@ public class OutputFileWriter {
       }
   }
 
-  private static String writeHeaderLine(HeaderTemplate header){
+  private static String writeHeaderLine(String tableName, HeaderTemplate header){
     List<String> columnNames = getAllColumnNames(header);
-    return "INSERT INTO `FAILURELOCATION` ("+String.join(", ", columnNames)+") VALUES\n";
+    return "INSERT INTO `"+tableName+"` ("+String.join(", ", columnNames)+") VALUES\n";
   }
 
   private static List<String> getAllColumnNames(HeaderTemplate header) {
@@ -52,5 +53,13 @@ public class OutputFileWriter {
     String baseDtc = row.getCell(1).toString().substring(0, baseDtcOriginal.length() - 2);
 
     return "UPDATE `FAILURE_LOCATION` SET FAILURE_LOCATION = '"+failureLocation+"' WHERE BASEDTC = '"+baseDtc+"';\n";
+  }
+
+  private static String removeExtension(String fileName) {
+    int lastDotIndex = fileName.lastIndexOf('.');
+    if (lastDotIndex != -1) {
+      return fileName.substring(0, lastDotIndex);
+    }
+    return fileName;
   }
 }
