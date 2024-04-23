@@ -10,18 +10,27 @@ import org.apache.poi.ss.usermodel.Row;
 import io.github.krzyzyb.reader.entities.XlsTemplate;
 
 public class OutputFileWriter {
-  public void write(XlsTemplate xlsTemplate, Path outputFile) {
-    try (FileWriter writer = new FileWriter("Rows.txt")) {
-      for (Row row : xlsTemplate.rows()) {
-        writer.write(writeRowLine(row));
-      }
-      System.out.println("Content successfully written to " + "Rows.txt");
+  public static void write(XlsTemplate xlsTemplate, Path outputFile) {
+    try (FileWriter writer = new FileWriter(outputFile.toFile())) {
+      prepareStructure(writer, xlsTemplate.header());
+      prepareContent(writer, xlsTemplate.rows());
+      System.out.println("Content successfully written to " + outputFile.toString());
     } catch (IOException e) {
       System.err.println("Error writing to file: " + e.getMessage());
     }
   }
 
-  private String writeRowLine(Row row){
+  private static void prepareStructure(FileWriter writer, Row header) throws IOException {
+    writer.write(writeHeaderLine(header));
+  }
+
+  private static void prepareContent(FileWriter writer, List<Row> rows) throws IOException {
+      for (Row row : rows) {
+        writer.write(writeRowLine(row));
+      }
+  }
+
+  private static String writeHeaderLine(Row row){
     String failureLocation = row.getCell(0).toString();
     String baseDtcOriginal = row.getCell(1).toString();
     String baseDtc = row.getCell(1).toString().substring(0, baseDtcOriginal.length() - 2);
@@ -29,19 +38,11 @@ public class OutputFileWriter {
     return "UPDATE `FAILURE_LOCATION` SET FAILURE_LOCATION = '"+failureLocation+"' WHERE BASEDTC = '"+baseDtc+"';\n";
   }
 
-  private String hexagonalInsert(){
-    return "INSERT INTO `FAILURELOCATION` (BASEDTC) \n";
-  }
+  private static String writeRowLine(Row row){
+    String failureLocation = row.getCell(0).toString();
+    String baseDtcOriginal = row.getCell(1).toString();
+    String baseDtc = row.getCell(1).toString().substring(0, baseDtcOriginal.length() - 2);
 
-  private String hexagonalFirst(String first){
-    return "VALUES ("+first+"),\n";
-  }
-
-  private String hexagonalRow(String row){
-    return "("+row+"),\n";
-  }
-
-  private String hexagonalLast(String last){
-    return "("+last+");\n";
+    return "UPDATE `FAILURE_LOCATION` SET FAILURE_LOCATION = '"+failureLocation+"' WHERE BASEDTC = '"+baseDtc+"';\n";
   }
 }

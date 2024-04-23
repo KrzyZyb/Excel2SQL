@@ -40,6 +40,10 @@ public class ImportedFile {
     return rows;
   }
 
+  public int getNumberOfColumns() {
+    return numberOfColumns;
+  }
+
   private void validateFile(Workbook file) {
     checkHeaderLine(file);
   }

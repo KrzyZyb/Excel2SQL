@@ -16,13 +16,9 @@ import io.github.krzyzyb.writer.OutputFileWriter;
  */
 public class XLS2Flyway
 {
-    public static void main(String[] args) throws FileNotFoundException {
-        XlsFileReader reader = new XlsFileReader();
-        OutputFileWriter writer = new OutputFileWriter();
-        Path path = Path.of("/Users/kzybul/IdeaProjects/XLS2Flyway/Failure_Types.xlsx");
-        ImportedFile importedFile = reader.read(path);
-        Row header = importedFile.getHeader();
-        List<Row> rows = importedFile.getRows();
-        System.out.println();
+    public static void main(String[] args){
+        Path inputPath = Path.of("/Users/kzybul/IdeaProjects/XLS2Flyway/Failure_Types.xlsx");
+        Path outputPath = Path.of("/Users/kzybul/IdeaProjects/XLS2Flyway/Result.sql");
+        Xls2SqlProcessor.process(inputPath, outputPath);
     }
 }

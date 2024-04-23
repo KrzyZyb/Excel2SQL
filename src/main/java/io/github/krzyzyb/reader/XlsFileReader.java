@@ -15,7 +15,7 @@ import io.github.krzyzyb.reader.entities.ImportedFile;
 
 public class XlsFileReader {
 
-  public ImportedFile read(Path path) throws FileNotFoundException {
+  public static ImportedFile read(Path path) throws FileNotFoundException {
     byte[] fileContent =  loadExcelFile(path);
     ImportedFile persistedFile;
     try {
