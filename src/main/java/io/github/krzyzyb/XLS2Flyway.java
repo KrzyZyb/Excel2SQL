@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
 
-import io.github.krzyzyb.reader.ExcelFileReader;
+import io.github.krzyzyb.reader.XlsFileReader;
 import io.github.krzyzyb.reader.entities.ImportedFile;
 import io.github.krzyzyb.writer.OutputFileWriter;
 
@@ -17,7 +17,7 @@ import io.github.krzyzyb.writer.OutputFileWriter;
 public class XLS2Flyway
 {
     public static void main(String[] args) throws FileNotFoundException {
-        ExcelFileReader reader = new ExcelFileReader();
+        XlsFileReader reader = new XlsFileReader();
         OutputFileWriter writer = new OutputFileWriter();
         Path path = Path.of("/Users/kzybul/IdeaProjects/XLS2Flyway/Failure_Types.xlsx");
         ImportedFile importedFile = reader.read(path);

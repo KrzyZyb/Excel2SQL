@@ -19,7 +19,7 @@ import io.github.krzyzyb.reader.exceptions.DuplicatedColumnsException;
 public class ImportedFile {
   public static final int SHEET_IDX = 0;
   public static final int FIRST_COLUMN_IDX = 0;
-  public static int NUMBER_OF_COLUMNS;
+  private int numberOfColumns;
   private final Workbook file;
   private final Row headerRow;
   private final List<Row> rows;
@@ -27,7 +27,7 @@ public class ImportedFile {
   public ImportedFile(Workbook file) {
     validateFile(file);
     this.headerRow = this.findHeader(file);
-    NUMBER_OF_COLUMNS = headerRow.getLastCellNum();
+    this.numberOfColumns = headerRow.getLastCellNum();
     this.file = file;
     this.rows = findRows(file);
   }

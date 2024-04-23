@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import io.github.krzyzyb.reader.entities.ImportedFile;
 
-public class ExcelFileReader {
+public class XlsFileReader {
 
   public ImportedFile read(Path path) throws FileNotFoundException {
     byte[] fileContent =  loadExcelFile(path);

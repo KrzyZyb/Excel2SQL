@@ -2,14 +2,17 @@ package io.github.krzyzyb.writer;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
 
+import io.github.krzyzyb.reader.entities.XlsTemplate;
+
 public class OutputFileWriter {
-  public void writeRowsToFile(List<Row> rows) {
+  public void write(XlsTemplate xlsTemplate, Path outputFile) {
     try (FileWriter writer = new FileWriter("Rows.txt")) {
-      for (Row row : rows) {
+      for (Row row : xlsTemplate.rows()) {
         writer.write(writeRowLine(row));
       }
       System.out.println("Content successfully written to " + "Rows.txt");
