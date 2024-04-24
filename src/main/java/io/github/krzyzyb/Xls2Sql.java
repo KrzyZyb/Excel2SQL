@@ -15,6 +15,7 @@ public class Xls2Sql
         Path inputPath = Path.of("/Users/kzybul/IdeaProjects/XLS2Flyway/Failure_Types.xlsx");
         Path outputPath = Path.of("/Users/kzybul/IdeaProjects/XLS2Flyway/Result.sql");
         OutputFileConfig config = new OutputFileConfig(Arrays.asList("COL1", "COL2"),"TABLE");
-        Xls2SqlProcessor.process(inputPath, outputPath, config);
+//        Xls2SqlProcessor.process(inputPath, outputPath, config);
+        Xls2SqlProcessor.process(inputPath, outputPath);
     }
 }

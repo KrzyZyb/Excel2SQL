@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -17,12 +16,12 @@ public class ImportedFile {
   private final HeaderTemplate headerRow;
   private final List<Row> rows;
 
-  public ImportedFile(Workbook file) {
-    this.headerRow = this.findHeader(file);
+  public ImportedFile(Workbook file, String tableName) {
+    this.headerRow = this.findHeader(file, tableName);
     this.rows = findRows(file);
   }
 
-  private HeaderTemplate findHeader(Workbook file) {
+  private HeaderTemplate findHeader(Workbook file, String tableName) {
     Sheet sheet = file.getSheetAt(SHEET_IDX);
     List<String> headerCells = new ArrayList<>();
 
@@ -32,7 +31,7 @@ public class ImportedFile {
         .orElseThrow(NoSuchElementException::new);
 
     headerRow.forEach(cell -> headerCells.add(cell.getStringCellValue()));
-    return new HeaderTemplate(headerCells);
+    return new HeaderTemplate(headerCells, tableName);
   }
 
   private List<Row> findRows(Workbook file) {

@@ -17,8 +17,7 @@ import io.github.krzyzyb.reader.entities.XlsTemplate;
 public class OutputFileWriter {
   public static void write(XlsTemplate xlsTemplate, Path outputFile) {
     try (FileWriter writer = new FileWriter(outputFile.toFile())) {
-      String tableName = removeExtension(outputFile.getFileName().toString());
-      prepareStructure(tableName, writer, xlsTemplate.header());
+      prepareStructure(writer, xlsTemplate.header());
       prepareContent(writer, xlsTemplate);
       System.out.println("Content successfully written to " + outputFile);
     } catch (IOException e) {
@@ -26,8 +25,8 @@ public class OutputFileWriter {
     }
   }
 
-  private static void prepareStructure(String tableName, FileWriter writer, HeaderTemplate header) throws IOException {
-    writer.write(writeHeaderLine(tableName, header));
+  private static void prepareStructure(FileWriter writer, HeaderTemplate header) throws IOException {
+    writer.write(writeHeaderLine(header));
   }
 
   private static void prepareContent(FileWriter writer, XlsTemplate xlsTemplate) throws IOException {
@@ -38,9 +37,9 @@ public class OutputFileWriter {
       }
   }
 
-  private static String writeHeaderLine(String tableName, HeaderTemplate header){
+  private static String writeHeaderLine(HeaderTemplate header){
     List<String> columnNames = getAllColumnNames(header);
-    return String.format("INSERT INTO `%s` (%s) VALUES \n", tableName, String.join(", ", columnNames));
+    return String.format("INSERT INTO `%s` (%s) VALUES \n", header.tableName(), String.join(", ", columnNames));
   }
 
   private static List<String> getAllColumnNames(HeaderTemplate header) {

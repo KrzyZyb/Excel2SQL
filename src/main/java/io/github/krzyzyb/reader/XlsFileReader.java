@@ -15,13 +15,13 @@ import io.github.krzyzyb.reader.entities.ImportedFile;
 
 public class XlsFileReader {
 
-  public static ImportedFile read(Path path) throws FileNotFoundException {
+  public static ImportedFile read(Path path, String tableName) throws FileNotFoundException {
     byte[] fileContent =  loadExcelFile(path);
     ImportedFile persistedFile;
     try {
       assert fileContent != null;
       try (InputStream inputStream = new ByteArrayInputStream(fileContent)) {
-        persistedFile = new ImportedFile(new XSSFWorkbook(inputStream));
+        persistedFile = new ImportedFile(new XSSFWorkbook(inputStream), tableName);
       }
     } catch (Exception ex) {
       throw new NotOfficeXmlFileException("Not XML file");
