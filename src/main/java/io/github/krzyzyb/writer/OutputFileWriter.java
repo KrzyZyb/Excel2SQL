@@ -3,6 +3,7 @@ package io.github.krzyzyb.writer;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ public class OutputFileWriter {
     try (FileWriter writer = new FileWriter(outputFile.toFile())) {
       String tableName = removeExtension(outputFile.getFileName().toString());
       prepareStructure(tableName, writer, xlsTemplate.header());
-      prepareContent(writer, xlsTemplate.rows());
+      prepareContent(writer, xlsTemplate);
       System.out.println("Content successfully written to " + outputFile);
     } catch (IOException e) {
       System.err.println("Error writing to file: " + e.getMessage());
@@ -29,15 +30,17 @@ public class OutputFileWriter {
     writer.write(writeHeaderLine(tableName, header));
   }
 
-  private static void prepareContent(FileWriter writer, List<Row> rows) throws IOException {
-      for (Row row : rows) {
-        writer.write(writeRowLine(row));
+  private static void prepareContent(FileWriter writer, XlsTemplate xlsTemplate) throws IOException {
+    List<Cell> columns = xlsTemplate.header().columns();
+
+    for (Row row : xlsTemplate.rows()) {
+        writer.write(writeRowLine(row, columns.size()));
       }
   }
 
   private static String writeHeaderLine(String tableName, HeaderTemplate header){
     List<String> columnNames = getAllColumnNames(header);
-    return "INSERT INTO `"+tableName+"` ("+String.join(", ", columnNames)+") VALUES\n";
+    return String.format("INSERT INTO `%s` (%s) VALUES \n", tableName, String.join(", ", columnNames));
   }
 
   private static List<String> getAllColumnNames(HeaderTemplate header) {
@@ -47,12 +50,12 @@ public class OutputFileWriter {
         .collect(Collectors.toList());
   }
 
-  private static String writeRowLine(Row row){
-    String failureLocation = row.getCell(0).toString();
-    String baseDtcOriginal = row.getCell(1).toString();
-    String baseDtc = row.getCell(1).toString().substring(0, baseDtcOriginal.length() - 2);
-
-    return "UPDATE `FAILURE_LOCATION` SET FAILURE_LOCATION = '"+failureLocation+"' WHERE BASEDTC = '"+baseDtc+"';\n";
+  private static String writeRowLine(Row row, int numberOfColumns){
+    List<String> columnValues = new ArrayList<>();
+    for(int i=0; i<numberOfColumns; i++){
+      columnValues.add(String.format("'%s'", row.getCell(i).toString()));
+    }
+    return String.format("(%s),\n", String.join(",", columnValues));
   }
 
   private static String removeExtension(String fileName) {
