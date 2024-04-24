@@ -5,9 +5,20 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
-@Getter
 public class OutputFileConfig {
   private final List<String> columnNames;
   private final String tableName;
+
+  public OutputFileConfig(List<String> columnNames, String tableName) {
+    this.columnNames = columnNames;
+    this.tableName = tableName;
+  }
+
+  public List<String> getColumnNames() {
+    return columnNames;
+  }
+
+  public String getTableName() {
+    return tableName;
+  }
 }
