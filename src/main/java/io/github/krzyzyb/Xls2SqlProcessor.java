@@ -5,6 +5,7 @@ import static io.github.krzyzyb.writer.OutputFileWriter.write;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
+import java.util.List;
 
 import io.github.krzyzyb.reader.XlsFileValidator;
 import io.github.krzyzyb.reader.entities.HeaderTemplate;
@@ -23,8 +24,10 @@ public class Xls2SqlProcessor {
 
   public static void process(Path inputFile, Path outputFile, OutputFileConfig config){
     ImportedFile file = readFile(inputFile, config.getTableName());
+    List<String> fileColumnNames = file.getHeaderRow().columns();
     HeaderTemplate header = new HeaderTemplate(config.getColumnNames(), config.getTableName());
     XlsFileValidator.validateHeader(header);
+    XlsFileValidator.validateConfig(fileColumnNames, config);
     XlsTemplate xlsTemplate = new XlsTemplate(header, file.getRows());
     write(xlsTemplate, outputFile);
   }

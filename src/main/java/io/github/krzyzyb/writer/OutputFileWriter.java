@@ -31,7 +31,6 @@ public class OutputFileWriter {
 
   private static void prepareContent(FileWriter writer, XlsTemplate xlsTemplate) throws IOException {
     List<String> columns = xlsTemplate.header().columns();
-
     for (Row row : xlsTemplate.rows()) {
         writer.write(writeRowLine(row, columns.size()));
       }
@@ -54,13 +53,5 @@ public class OutputFileWriter {
       columnValues.add(String.format("'%s'", row.getCell(i).toString()));
     }
     return String.format("(%s),\n", String.join(",", columnValues));
-  }
-
-  private static String removeExtension(String fileName) {
-    int lastDotIndex = fileName.lastIndexOf('.');
-    if (lastDotIndex != -1) {
-      return fileName.substring(0, lastDotIndex);
-    }
-    return fileName;
   }
 }

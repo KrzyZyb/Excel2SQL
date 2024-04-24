@@ -1,7 +1,6 @@
 package io.github.krzyzyb.reader.exceptions;
 
 import java.io.Serial;
-import java.util.List;
 import java.util.Set;
 
 public class DuplicatedColumnsException extends Exception {
