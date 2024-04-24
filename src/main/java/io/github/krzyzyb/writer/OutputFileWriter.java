@@ -31,7 +31,7 @@ public class OutputFileWriter {
   }
 
   private static void prepareContent(FileWriter writer, XlsTemplate xlsTemplate) throws IOException {
-    List<Cell> columns = xlsTemplate.header().columns();
+    List<String> columns = xlsTemplate.header().columns();
 
     for (Row row : xlsTemplate.rows()) {
         writer.write(writeRowLine(row, columns.size()));
@@ -45,7 +45,6 @@ public class OutputFileWriter {
 
   private static List<String> getAllColumnNames(HeaderTemplate header) {
     return header.columns().stream()
-        .map(Cell::getStringCellValue)
         .filter(StringUtil::isNotBlank)
         .collect(Collectors.toList());
   }

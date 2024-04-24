@@ -31,7 +31,6 @@ public class XlsFileValidator {
 
   private static List<String> getAllColumnNames(HeaderTemplate header) {
     return header.columns().stream()
-        .map(Cell::getStringCellValue)
         .filter(StringUtil::isNotBlank)
         .collect(Collectors.toList());
   }

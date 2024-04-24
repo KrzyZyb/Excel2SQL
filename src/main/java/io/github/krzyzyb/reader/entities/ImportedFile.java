@@ -24,15 +24,15 @@ public class ImportedFile {
 
   private HeaderTemplate findHeader(Workbook file) {
     Sheet sheet = file.getSheetAt(SHEET_IDX);
-    List<Cell> headerCells = new ArrayList<>();
+    List<String> headerCells = new ArrayList<>();
 
     Row headerRow = StreamSupport.stream(sheet.spliterator(), false)
         .filter(Objects::nonNull)
         .findFirst()
         .orElseThrow(NoSuchElementException::new);
 
-    headerRow.forEach(headerCells::add);
-    return new HeaderTemplate(headerCells, headerRow.getLastCellNum());
+    headerRow.forEach(cell -> headerCells.add(cell.getStringCellValue()));
+    return new HeaderTemplate(headerCells);
   }
 
   private List<Row> findRows(Workbook file) {
