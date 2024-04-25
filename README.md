@@ -33,23 +33,15 @@
     configuration (<code>config</code>). The configuration (<code>OutputFileConfig</code>) allows you to customize the
     table name and column names for the output SQL script.</p>
   <h2>Example</h2>
-  <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div
-      class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><div
-      class="flex items-center"><span class="" data-state="closed"></span></div></div><div class="p-4 overflow-y-auto"><code
-      class="!whitespace-pre hljs language-java"><span class="hljs-type">Path</span> <span class="hljs-variable">inputFile</span> <span
-      class="hljs-operator">=</span> Paths.get(<span class="hljs-string">"./user/Source.xls"</span>);
-<span class="hljs-type">Path</span> <span class="hljs-variable">outputFile</span> <span class="hljs-operator">=</span> Paths.get(<span
-        class="hljs-string">"./user/Destiny.sql"</span>);
-
-<span class="hljs-comment">// Default processing method</span>
-Xls2SqlProcessor.process(inputFile, outputFile);
-
-<span class="hljs-comment">// Custom processing method with configuration</span>
-<span class="hljs-type">OutputFileConfig</span> <span class="hljs-variable">config</span> <span
-        class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OutputFileConfig</span>(<span
-        class="hljs-string">"CustomTableName"</span>, Arrays.asList(<span class="hljs-string">"Column1"</span>, <span
-        class="hljs-string">"Column2"</span>));
-Xls2SqlProcessor.process(inputFile, outputFile, config);
+  <div><code>Path inputFile = Paths.get("./user/Source.xls");</code></div>
+  <div><code>Path outputFile = Paths.get("./user/Destiny.sql");</code></div>
+<br>
+<div>// Default processing method</div>
+<div><code>Xls2SqlProcessor.process(inputFile, outputFile);</code></div>
+<br>
+<div>// Custom processing method with configuration</div>
+<div><code>OutputFileConfig config = new OutputFileConfig("CustomTableName", Arrays.asList("Column1", "Column2"));</code></div>
+<div><code>Xls2SqlProcessor.process(inputFile, outputFile, config);</code></div>
 </code></div></div></pre>
   <h2>Requirements</h2>
   <ul>
