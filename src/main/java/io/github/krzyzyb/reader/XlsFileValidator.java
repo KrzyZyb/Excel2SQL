@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.util.StringUtil;
 
 import io.github.krzyzyb.reader.entities.HeaderTemplate;
@@ -42,7 +41,7 @@ public class XlsFileValidator {
 
   private static void checkNumberOfColumnNames(List<String> fileColumnNames, OutputFileConfig config)
       throws InvalidConfigException {
-    List<String> configColumnNames = config.getColumnNames();
+    List<String> configColumnNames = config.columnNames();
     if (!Objects.equals(fileColumnNames.size(), configColumnNames.size())) {
       throw new InvalidConfigException("Columns provided in config do not match number of columns in file.");
     }

@@ -51,4 +51,22 @@ public class XlsFileReader {
       }
     }
   }
+
+
+  public static ImportedFile readFile(Path inputFile, String tableName){
+    try {
+      return read(inputFile, tableName);
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException("Xls file not found");
+    }
+  }
+
+  public static String readFileName(Path path){
+    String fileName = path.getFileName().toString();
+    int lastDotIndex = fileName.lastIndexOf('.');
+    if (lastDotIndex != -1) {
+      return fileName.substring(0, lastDotIndex);
+    }
+    return fileName;
+  }
 }
