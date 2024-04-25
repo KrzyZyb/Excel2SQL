@@ -8,14 +8,23 @@ import java.util.stream.Collectors;
 
 import org.apache.poi.util.StringUtil;
 
-import io.github.krzyzyb.reader.entities.HeaderTemplate;
+import io.github.krzyzyb.reader.entities.Header;
 import io.github.krzyzyb.reader.exceptions.DuplicatedColumnsException;
 import io.github.krzyzyb.reader.exceptions.InvalidConfigException;
 import io.github.krzyzyb.writer.OutputFileConfig;
 
 public class XlsFileValidator {
 
-  public static void validateHeader(HeaderTemplate header) {
+  public static void validate(Header header) {
+    validateHeader(header);
+  }
+
+  public static void validate(Header header, List<String> fileColumnNames, OutputFileConfig config) {
+    validateHeader(header);
+    validateConfig(fileColumnNames, config);
+  }
+
+  private static void validateHeader(Header header) {
     try {
       checkIfColumnsAreDuplicated(header);
     } catch (DuplicatedColumnsException e){
@@ -23,7 +32,7 @@ public class XlsFileValidator {
     }
   }
 
-  public static void validateConfig(List<String> fileColumnNames, OutputFileConfig config) {
+  private static void validateConfig(List<String> fileColumnNames, OutputFileConfig config) {
     try {
       checkNumberOfColumnNames(fileColumnNames, config);
     } catch (InvalidConfigException e){
@@ -31,7 +40,7 @@ public class XlsFileValidator {
     }
   }
 
-  private static void checkIfColumnsAreDuplicated(HeaderTemplate header) throws DuplicatedColumnsException {
+  private static void checkIfColumnsAreDuplicated(Header header) throws DuplicatedColumnsException {
     List<String> columnNames = getAllColumnNames(header);
     Set<String> duplicatedColumnNames = findDuplicatedColumns(columnNames);
     if (!duplicatedColumnNames.isEmpty()) {
@@ -47,7 +56,7 @@ public class XlsFileValidator {
     }
   }
 
-  private static List<String> getAllColumnNames(HeaderTemplate header) {
+  private static List<String> getAllColumnNames(Header header) {
     return header.columns().stream()
         .filter(StringUtil::isNotBlank)
         .collect(Collectors.toList());

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.util.StringUtil;
 
-import io.github.krzyzyb.reader.entities.HeaderTemplate;
+import io.github.krzyzyb.reader.entities.Header;
 import io.github.krzyzyb.reader.entities.XlsTemplate;
 
 public class OutputFileWriter {
@@ -24,7 +24,7 @@ public class OutputFileWriter {
     }
   }
 
-  private static void prepareStructure(FileWriter writer, HeaderTemplate header) throws IOException {
+  private static void prepareStructure(FileWriter writer, Header header) throws IOException {
     writer.write(writeHeaderLine(header));
   }
 
@@ -35,12 +35,12 @@ public class OutputFileWriter {
       }
   }
 
-  private static String writeHeaderLine(HeaderTemplate header){
+  private static String writeHeaderLine(Header header){
     List<String> columnNames = getAllColumnNames(header);
     return String.format("INSERT INTO `%s` (%s) VALUES \n", header.tableName(), String.join(", ", columnNames));
   }
 
-  private static List<String> getAllColumnNames(HeaderTemplate header) {
+  private static List<String> getAllColumnNames(Header header) {
     return header.columns().stream()
         .filter(StringUtil::isNotBlank)
         .collect(Collectors.toList());

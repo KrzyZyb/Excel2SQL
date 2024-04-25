@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -13,15 +12,15 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 public class ImportedFile {
   public static final int SHEET_IDX = 0;
-  private final HeaderTemplate headerRow;
-  private final List<Row> rows;
+  private final Header header;
+  private final Content content;
 
   public ImportedFile(Workbook file, String tableName) {
-    this.headerRow = this.findHeader(file, tableName);
-    this.rows = findRows(file);
+    this.header = findHeader(file, tableName);
+    this.content = findContent(file);
   }
 
-  private HeaderTemplate findHeader(Workbook file, String tableName) {
+  private Header findHeader(Workbook file, String tableName) {
     Sheet sheet = file.getSheetAt(SHEET_IDX);
     List<String> headerCells = new ArrayList<>();
 
@@ -31,21 +30,22 @@ public class ImportedFile {
         .orElseThrow(NoSuchElementException::new);
 
     headerRow.forEach(cell -> headerCells.add(cell.getStringCellValue()));
-    return new HeaderTemplate(headerCells, tableName);
+    return new Header(headerCells, tableName);
   }
 
-  private List<Row> findRows(Workbook file) {
+  private Content findContent(Workbook file) {
     Sheet sheet = file.getSheetAt(SHEET_IDX);
-    return StreamSupport.stream(sheet.spliterator(), false)
+    List<Row> rows = StreamSupport.stream(sheet.spliterator(), false)
         .skip(1)
-        .collect(Collectors.toList());
+        .toList();
+    return new Content(rows);
   }
 
-  public HeaderTemplate getHeaderRow() {
-    return headerRow;
+  public Header getHeader() {
+    return header;
   }
 
-  public List<Row> getRows() {
-    return rows;
+  public Content getContent() {
+    return content;
   }
 }

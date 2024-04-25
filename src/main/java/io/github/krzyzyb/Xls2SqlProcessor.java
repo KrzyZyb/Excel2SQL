@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import io.github.krzyzyb.reader.XlsFileValidator;
-import io.github.krzyzyb.reader.entities.HeaderTemplate;
+import io.github.krzyzyb.reader.entities.Header;
 import io.github.krzyzyb.reader.entities.ImportedFile;
 import io.github.krzyzyb.reader.entities.XlsTemplate;
 import io.github.krzyzyb.writer.OutputFileConfig;
@@ -30,8 +30,8 @@ public class Xls2SqlProcessor {
   public static void process(Path inputFile, Path outputFile) {
     String outputFileName = readFileName(outputFile);
     ImportedFile file = readFile(inputFile, outputFileName);
-    XlsFileValidator.validateHeader(file.getHeaderRow());
-    XlsTemplate xlsTemplate = new XlsTemplate(file.getHeaderRow(), file.getRows());
+    XlsFileValidator.validate(file.getHeader());
+    XlsTemplate xlsTemplate = new XlsTemplate(file.getHeader(), file.getContent());
     write(xlsTemplate, outputFile);
   }
 
@@ -47,10 +47,9 @@ public class Xls2SqlProcessor {
    */
   public static void process(Path inputFile, Path outputFile, OutputFileConfig config){
     ImportedFile file = readFile(inputFile, config.tableName());
-    List<String> fileColumnNames = file.getHeaderRow().columns();
-    HeaderTemplate header = new HeaderTemplate(config.columnNames(), config.tableName());
-    XlsFileValidator.validateHeader(header);
-    XlsFileValidator.validateConfig(fileColumnNames, config);
-    write(new XlsTemplate(header, file.getRows()), outputFile);
+    List<String> fileColumnNames = file.getHeader().columns();
+    Header header = new Header(config.columnNames(), config.tableName());
+    XlsFileValidator.validate(header, fileColumnNames, config);
+    write(new XlsTemplate(header, file.getContent()), outputFile);
   }
 }
