@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
 
   <name>XLS2SQL</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/KrzyZyb/XLS2SQL</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,6 +67,13 @@
       </plugin>
     </plugins>
   </build>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub OWNER Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/krzyzyb/XLS2SQL</url>
+    </repository>
+  </distributionManagement>
 </project>
 
 
