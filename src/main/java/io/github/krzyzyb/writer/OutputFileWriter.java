@@ -30,7 +30,7 @@ public class OutputFileWriter {
 
   private static void prepareContent(FileWriter writer, XlsTemplate xlsTemplate) throws IOException {
     List<String> columns = xlsTemplate.header().columns();
-    for (Row row : xlsTemplate.rows()) {
+    for (Row row : xlsTemplate.content().rows()) {
         writer.write(writeRowLine(row, columns.size()));
       }
   }

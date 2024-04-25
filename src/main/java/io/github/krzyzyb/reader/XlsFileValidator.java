@@ -29,6 +29,7 @@ public class XlsFileValidator {
       checkIfColumnsAreDuplicated(header);
     } catch (DuplicatedColumnsException e){
       e.getDuplicatedColumnNames().forEach(columnName -> System.err.println("Duplicated column name: "+ columnName));
+      System.exit(1);
     }
   }
 
@@ -37,6 +38,7 @@ public class XlsFileValidator {
       checkNumberOfColumnNames(fileColumnNames, config);
     } catch (InvalidConfigException e){
       System.err.println(e.getMessage());
+      System.exit(1);
     }
   }
 
