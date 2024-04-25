@@ -37,7 +37,7 @@
       class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><div
       class="flex items-center"><span class="" data-state="closed"></span></div></div><div class="p-4 overflow-y-auto"><code
       class="!whitespace-pre hljs language-java"><span class="hljs-type">Path</span> <span class="hljs-variable">inputFile</span> <span
-      class="hljs-operator">=</span> Paths.get(<span class="hljs-string">"/user/Source.xls"</span>);
+      class="hljs-operator">=</span> Paths.get(<span class="hljs-string">"./user/Source.xls"</span>);
 <span class="hljs-type">Path</span> <span class="hljs-variable">outputFile</span> <span class="hljs-operator">=</span> Paths.get(<span
         class="hljs-string">"./user/Destiny.sql"</span>);
 
