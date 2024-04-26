@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"io.github.krzyzyb"},{"l":"io.github.krzyzyb.reader"},{"l":"io.github.krzyzyb.reader.entities"},{"l":"io.github.krzyzyb.reader.exceptions"},{"l":"io.github.krzyzyb.writer"}];updateSearchResults();
