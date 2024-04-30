@@ -1,3 +1,7 @@
+[![Maven Package](https://github.com/KrzyZyb/XLS2SQL/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/KrzyZyb/XLS2SQL/actions/workflows/maven-publish.yml)
+[![Java CI with Maven](https://github.com/KrzyZyb/XLS2SQL/actions/workflows/maven.yml/badge.svg)](https://github.com/KrzyZyb/XLS2SQL/actions/workflows/maven.yml)
+
+
 <!DOCTYPE html>
 <html lang="en">
 <body>
