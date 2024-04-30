@@ -1,6 +1,16 @@
 ![Static Badge](https://img.shields.io/badge/License-MIT-yellow?link=https%3A%2F%2Fopensource.org%2Flicense%2FMIT)
 [![Package Deploy](https://github.com/KrzyZyb/XLS2SQL/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/KrzyZyb/XLS2SQL/actions/workflows/maven-publish.yml)
 [![Build](https://github.com/KrzyZyb/XLS2SQL/actions/workflows/maven.yml/badge.svg)](https://github.com/KrzyZyb/XLS2SQL/actions/workflows/maven.yml)
+![GitHub Release](https://img.shields.io/github/v/release/KrzyZyb/XLS2SQL)
+
+
+
+
+
+
+
+
+
 
 
 <!DOCTYPE html>
