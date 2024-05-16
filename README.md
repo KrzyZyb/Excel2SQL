@@ -17,8 +17,8 @@
 <html lang="en">
 <body>
 <div class="markdown prose w-full break-words dark:prose-invert light">
-  <h1>XLS2SQL</h1>
-  <p>The XLS to SQL Processor library provides functionality to map Excel files to SQL scripts that insert rows into a
+  <h1>Excel2SQL</h1>
+  <p>The Excel to SQL Processor library provides functionality to map Excel files to SQL scripts that insert rows into a
     data table. It offers two endpoints for processing Excel files and generating SQL scripts.</p>
   <h2>Features</h2>
   <ul>
