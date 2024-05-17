@@ -27,6 +27,35 @@
     <li>Validate Excel files and configurations to ensure data integrity.</li>
   </ul>
   <h2>Usage</h2>
+    <h3>Dependency</h3>
+  <p>Just use as regular dependency via maven in POM.xml</p>
+    <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div
+      class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><div
+      class="flex items-center"><span class="" data-state="closed"></span></div></div><div class="p-4 overflow-y-auto"><code
+      class="!whitespace-pre hljs language-java">  
+&lt;dependency&gt;
+  &lt;groupId&gt;io.github.krzyzyb&lt;/groupId&gt;
+  &lt;artifactId&gt;xls2sql&lt;/artifactId&gt;
+  &lt;version&gt;1.1.3&lt;/version&gt;
+&lt;/dependency&gt;
+
+</code></div></div></pre>
+
+  <p>Don't forget to inform maven that you are using dependencies from github package registry. Update POM.xml with:</p>
+
+  <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div
+      class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><div
+      class="flex items-center"><span class="" data-state="closed"></span></div></div><div class="p-4 overflow-y-auto"><code
+      class="!whitespace-pre hljs language-java">  
+&lt;repositories&gt;
+  &lt;repository&gt;
+    &lt;id&gt;github&lt;/id&gt;
+    &lt;url&gt;https://maven.pkg.github.com/krzyzyb/xls2sql&lt;/url&gt;
+  &lt;/repository&gt;
+&lt;/repositories&gt;
+
+</code></div></div></pre>
+
   <h3>Default Processing Method</h3>
   <pre><div class="dark bg-gray-950 rounded-md border-[0.5px] border-token-border-medium"><div
       class="flex items-center relative text-token-text-secondary bg-token-main-surface-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md"><div
